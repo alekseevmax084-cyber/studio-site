@@ -442,6 +442,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 /* редактор */
 .ed{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
 .ed>*{min-width:0}
+.ed-stage{display:grid;justify-items:center}
 .ctrl{display:grid;gap:10px;margin-top:28px;max-width:440px}
 .ctrl label,.ctrl .lbl{font:500 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-top:6px}
 .ctrl input{font:600 16px var(--f-body);color:var(--fg);background:var(--panel);border:1px solid var(--line2);border-radius:12px;padding:12px 14px}
@@ -484,20 +485,78 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 .wide-card h3{font-size:22px;font-weight:600}
 .wide-card p{color:var(--dim)}
 @media (max-width:820px){.wide-card{grid-template-columns:1fr}}
+
+.hero-price{margin-top:16px;color:var(--dim);font-size:15px}.hero-price b{color:var(--fg)}
+.howgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.hw{margin:0;border-radius:var(--r);overflow:hidden;background:var(--panel);border:1px solid var(--line)}
+.hw-media{position:relative;aspect-ratio:960/508;background:#000}
+.hw-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hw figcaption{display:flex;gap:14px;padding:18px 20px 20px;align-items:flex-start}
+.hw-n{flex:none;width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:var(--blue);font:700 15px var(--f-disp)}
+.hw h3{font-size:17px;font-weight:600}.hw p{color:var(--dim);font-size:14px;margin-top:4px}
+@media (max-width:760px){.howgrid{grid-template-columns:1fr}}
+.who{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.wh{padding:26px;border-radius:var(--r);background:var(--panel);border:1px solid var(--line);display:grid;gap:10px;align-content:start}
+.wh h3{font-size:19px;font-weight:600;line-height:1.2}.wh p{color:var(--dim);font-size:15px}
+@media (max-width:860px){.who{grid-template-columns:1fr}}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cmp-col{padding:28px;border-radius:var(--r);border:1px solid var(--line);display:grid;gap:16px;align-content:start}
+.cmp-col.old{background:var(--panel)}
+.cmp-col.new{background:radial-gradient(100% 120% at 100% 0%,rgba(42,95,232,.35),transparent 60%),var(--panel);border-color:rgba(127,164,255,.4)}
+.cmp-col h3{font-size:20px;font-weight:600}
+.cmp-col ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.cmp-col li{display:flex;justify-content:space-between;gap:14px;padding-bottom:10px;border-bottom:1px dashed var(--line2);font-size:15px}
+.cmp-col li b{font-variant-numeric:tabular-nums;white-space:nowrap}
+.cmp-col.old li b{color:var(--ember2)}.cmp-col.new li b{color:var(--blue2)}
+.cmp-total{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.cmp-total span{color:var(--dim)}.cmp-total b{font:800 clamp(26px,3.4vw,38px) var(--f-disp);letter-spacing:-.02em}
+.cmp-col.old .cmp-total b{color:var(--ember2)}
+.cmp-note{color:var(--mute);font-size:13px}
+.cmp-src{margin-top:14px;color:var(--mute);font-size:12px}
+@media (max-width:760px){.cmp{grid-template-columns:1fr}}
+.chan{display:grid;grid-template-columns:.8fr 1.2fr;gap:48px;align-items:center;margin-top:56px}
+.chan>*{min-width:0}
+.chan-card{justify-self:center;width:min(360px,100%);border-radius:24px;padding:16px;background:#17212b;box-shadow:0 0 0 1px var(--line2),0 30px 60px -30px rgba(0,0,0,.9);display:grid;gap:10px}
+.chan-top{display:flex;gap:12px;align-items:center;padding:4px 4px 8px;border-bottom:1px solid rgba(255,255,255,.08)}
+.chan-top i{width:42px;height:42px;border-radius:50%;background:url(favicon.png) center/cover,var(--blue)}
+.chan-top b{font-size:15px;display:block}.chan-top small{color:#7f91a4;font-size:12px}
+.post{background:#182533;border-radius:14px 14px 14px 4px;padding:11px 13px;font-size:14px;line-height:1.35}
+@media (max-width:860px){.chan{grid-template-columns:1fr;gap:28px}}
+.sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:70;display:none;align-items:center;justify-content:space-between;gap:12px;padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:rgba(11,11,12,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line)}
+.sticky-cta b{font:800 18px var(--f-disp);display:block}.sticky-cta small{color:var(--dim);font-size:12px}
+.sticky-cta .btn{padding:12px 18px}
+@media (max-width:760px){.sticky-cta:not([hidden]){display:flex}footer{padding-bottom:90px}}
+
+.ba2{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:460px;width:100%;justify-self:center}
+.bb{margin:0;display:grid;gap:10px;justify-items:center}
+.bb-tag{font:600 12px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.bb.after .bb-tag{color:var(--blue2)}
+.bb-media{position:relative;width:100%;aspect-ratio:9/16;border-radius:20px;overflow:hidden;background:#000;box-shadow:0 0 0 1px var(--line2)}
+.bb.after .bb-media{box-shadow:0 0 0 2px var(--blue),0 24px 60px -24px rgba(42,95,232,.8)}
+.bb-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@media (max-width:900px){
+  .ed{gap:20px}
+  .ed-left{display:contents}
+  .ed-left>.tc,.ed-left>h2,.ed-left>.lead{order:0}
+  .ed-stage{order:1;position:sticky;top:calc(64px + env(safe-area-inset-top,0px));z-index:5;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left,0px)));padding:10px 16px 14px;background:var(--bg);border-bottom:1px solid var(--line);display:grid;justify-items:center}
+  .ed-phone{width:min(170px,44vw)}
+  .ed-left>.ctrl{order:2;margin-top:0;max-width:none}
+}
 </style>
 
 <header>
   <div class="wrap nav">
     <a class="logo" href="#top"><i></i>ReelForge</a>
     <ul>
-      <li><a href="#tour">Обзор</a></li>
+      <li><a href="#how">Как работает</a></li>
+      <li><a href="#who">Для кого</a></li>
       <li><a href="#cycle">Весь цикл</a></li>
       <li><a href="#editor">Редактор</a></li>
       <li><a href="#styles">Стили</a></li>
       <li><a href="#offer">Цена</a></li>
       <li><a href="#faq">Вопросы</a></li>
     </ul>
-    <a class="btn btn-main js-tg" href="#offer">Получить доступ</a>
+    <a class="btn btn-main" href="#how">Как работает</a>
   </div>
 </header>
 
@@ -509,8 +568,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
         <h1 style="margin-top:16px">Вся контент-команда <em>в одном</em> окне</h1>
         <p class="lead">Монтаж рилсов, карусели, разбор залетевших роликов конкурентов, сценарист и агент, который сам предлагает идею монтажа. Ты снимаешь, остальное делает студия.</p>
         <div class="hero-cta">
-          <a class="btn btn-main js-tg" href="#offer">Получить доступ к студии →</a>
-          <a class="btn btn-ghost" href="#tour">Смотреть обзор</a>
+          <a class="btn btn-main" href="#how">Как это работает ↓</a>
         </div>
         <div class="hero-meta"><span><b>Монтажёр</b></span><span><b>Сценарист</b></span><span><b>Аналитик</b></span><span><b>Дизайнер каруселей</b></span></div>
       </div>
@@ -526,6 +584,36 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
       <div class="stat"><b>∞</b><span>своих стилей в редакторе</span></div>
       <div class="stat"><b>4</b><span>раздела: рилсы, YouTube, карусели, стили</span></div>
     </div>
+
+    <section id="how">
+      <div class="sec-head">
+        <p class="tc">Как это работает</p>
+        <h2>Четыре шага <span class="chrome">внутри студии</span></h2>
+        <p class="lead">Это реальная запись экрана, а не макет. Так выглядит работа от загрузки видео до готового ролика.</p>
+      </div>
+      <div class="howgrid">
+        <figure class="hw"><div class="hw-media"><video data-src="media/step1.mp4" poster="media/step1.jpg" muted loop playsinline preload="none"></video></div>
+          <figcaption><span class="hw-n">1</span><div><h3>Загружаешь видео</h3><p>Перетаскиваешь исходник в студию. Подойдёт любое видео с телефона.</p></div></figcaption></figure>
+        <figure class="hw"><div class="hw-media"><video data-src="media/step2.mp4" poster="media/step2.jpg" muted loop playsinline preload="none"></video></div>
+          <figcaption><span class="hw-n">2</span><div><h3>Выбираешь стиль</h3><p>Готовый из библиотеки или свой. Новый стиль можно собрать по паре понравившихся роликов.</p></div></figcaption></figure>
+        <figure class="hw"><div class="hw-media"><video data-src="media/step3.mp4" poster="media/step3.jpg" muted loop playsinline preload="none"></video></div>
+          <figcaption><span class="hw-n">3</span><div><h3>Жмёшь «Смонтировать»</h3><p>Студия сама ставит текст, акценты, графику и переходы. Исходник и результат рядом.</p></div></figcaption></figure>
+        <figure class="hw"><div class="hw-media"><video data-src="media/step4.mp4" poster="media/step4.jpg" muted loop playsinline preload="none"></video></div>
+          <figcaption><span class="hw-n">4</span><div><h3>Делаешь карусель и следующий ролик</h3><p>Из той же темы студия собирает карусель, а сценарист пишет следующий сценарий.</p></div></figcaption></figure>
+      </div>
+    </section>
+
+    <section id="who">
+      <div class="sec-head">
+        <p class="tc">Для кого</p>
+        <h2>Узнай себя <span class="chrome">в одном из трёх</span></h2>
+      </div>
+      <div class="who">
+        <article class="wh"><span class="tc">Эксперт</span><h3>Ведёшь блог сам, без монтажёра</h3><p>Снимаешь на телефон, а монтаж съедает вечер. Тут ролик готов за минуты, и выглядит дороже, чем ты делал руками.</p></article>
+        <article class="wh"><span class="tc">Бизнес</span><h3>Продвигаешь компанию в соцсетях</h3><p>Нет бюджета на продакшен. Студия закрывает сценарии, монтаж и карусели, а ты остаёшься в кадре.</p></article>
+        <article class="wh"><span class="tc">SMM и монтажёр</span><h3>Ведёшь несколько клиентов</h3><p>Тратишь часы на однотипный монтаж. Сохраняешь стиль под каждого клиента и делаешь в разы больше роликов.</p></article>
+      </div>
+    </section>
 
     <section id="tour" class="tour">
       <div class="sec-head" style="margin-inline:auto;text-align:center;justify-items:center">
@@ -573,15 +661,9 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 
     <section id="ba">
       <div class="ba">
-        <div class="ba-col">
-          <div class="ba-stage" id="baStage" style="--x:50%">
-            <video src="media/before.mp4" poster="media/before.jpg" autoplay muted loop playsinline preload="metadata"></video>
-            <video class="after" src="media/after.mp4" poster="media/depth-ui.jpg" autoplay muted loop playsinline preload="metadata"></video>
-            <div class="ba-handle"></div>
-            <span class="ba-tag l">исходник</span><span class="ba-tag r">студия</span>
-          </div>
-          <label for="baRange" class="tc" style="justify-self:center;margin-top:16px;color:var(--mute)">потяни, чтобы сравнить</label>
-          <input id="baRange" type="range" min="0" max="100" value="50">
+        <div class="ba2">
+          <figure class="bb"><span class="bb-tag">До</span><div class="bb-media"><video data-src="media/before.mp4" poster="media/before.jpg" muted loop playsinline preload="none"></video></div></figure>
+          <figure class="bb after"><span class="bb-tag">После</span><div class="bb-media"><video data-src="media/after.mp4" poster="media/depth-ui.jpg" muted loop playsinline preload="none"></video></div></figure>
         </div>
         <div>
           <p class="tc">До и после</p>
@@ -598,7 +680,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 
     <section id="editor">
       <div class="ed">
-        <div>
+        <div class="ed-left">
           <p class="tc">Редактор</p>
           <h2 style="margin-top:14px">Не понравилось? <span class="chrome">Поменяй сам</span></h2>
           <p class="lead" style="margin-top:16px">Текст, шрифт, цвета, акценты. Собери свой стиль один раз, сохрани, и студия будет монтировать в нём все следующие ролики.</p>
@@ -637,11 +719,13 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
             <span class="saved" id="edSaved" hidden>Стиль «Мой» сохранён · пример</span>
           </div>
         </div>
+        <div class="ed-stage">
         <div class="ed-phone behind center" id="edPhone">
           <img src="media/ed_bg.jpg" alt="Кадр из исходника">
           <div class="ed-word" id="edWord">ЗА 20 ДОЛЛАРОВ</div>
           <img class="ed-cut" src="media/ed_cut.png" alt="">
           <div class="ed-sub"><span>и это</span> <b id="edAcc">очень</b> <span>легко</span></div>
+        </div>
         </div>
       </div>
     </section>
@@ -665,6 +749,35 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
       </figure>
     </section>
 
+    <section id="compare">
+      <div class="sec-head">
+        <p class="tc">Сколько это стоит без студии</p>
+        <h2>Команда каждый месяц <span class="chrome">или студия один раз</span></h2>
+      </div>
+      <div class="cmp">
+        <div class="cmp-col old">
+          <h3>Нанять людей</h3>
+          <ul>
+            <li><span>Монтажёр, 12 роликов</span><b>от 24 000 ₽</b></li>
+            <li><span>SMM-специалист</span><b>от 35 000 ₽</b></li>
+            <li><span>Сценарии, разбор конкурентов</span><b>отдельно</b></li>
+          </ul>
+          <div class="cmp-total"><span>Каждый месяц</span><b>от 59 000 ₽</b></div>
+        </div>
+        <div class="cmp-col new">
+          <h3>Студия</h3>
+          <ul>
+            <li><span>Монтаж рилсов и YouTube</span><b>✓</b></li>
+            <li><span>Сценарист и разбор конкурентов</span><b>✓</b></li>
+            <li><span>Карусели и свои стили</span><b>✓</b></li>
+          </ul>
+          <div class="cmp-total"><span>Один раз</span><b>4 990 ₽</b></div>
+          <p class="cmp-note">Плюс твоя подписка Claude Pro.</p>
+        </div>
+      </div>
+      <p class="cmp-src">Цены специалистов: монтаж ролика у фрилансера 2 000–8 000 ₽ (Sostav), средняя стоимость SMM 35 000 ₽ в месяц (SMMplanner).</p>
+    </section>
+
     <section id="offer">
       <div class="price">
         <span class="orb a" aria-hidden="true"></span><span class="orb b" aria-hidden="true"></span>
@@ -676,6 +789,24 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
         <a class="btn btn-main" href="https://t.me/tribute/app?startapp=s1aki" target="_blank" rel="noopener">Забрать доступ <span>↗</span></a>
         <p class="fine">Монтажёр берёт несколько тысяч за один ролик, сценарист и SMM ещё столько же. Здесь ты получаешь всё это в одной студии.</p>
         <div class="incl"><span>Монтаж рилсов</span><span>YouTube и шортсы</span><span>Карусели</span><span>Разбор конкурентов</span><span>Сценарист</span><span>Агент идей монтажа</span><span>Редактор и свои стили</span><span>9 готовых стилей</span><span>Обновления</span></div>
+      </div>
+      <div class="chan">
+        <div class="chan-card" aria-hidden="true">
+          <div class="chan-top"><i></i><div><b>Студия · закрытый канал</b><small>доступ после оплаты</small></div></div>
+          <div class="post">📌 Установка студии за 10 минут: пошаговая инструкция</div>
+          <div class="post">🎬 Новый стиль в библиотеке</div>
+          <div class="post">🔄 Обновление студии: что нового</div>
+          <div class="post">💬 Ответы на вопросы участников</div>
+        </div>
+        <div>
+          <p class="tc">Закрытый канал</p>
+          <h2 style="margin-top:14px">После оплаты <span class="chrome">ты в канале</span></h2>
+          <ul class="checks">
+            <li><span><b>Инструкция по установке</b> шаг за шагом, без программирования.</span></li>
+            <li><span><b>Обновления студии</b> и новые стили, как только выходят.</span></li>
+            <li><span><b>Поддержка:</b> если что-то не получается, разберёмся.</span></li>
+          </ul>
+        </div>
       </div>
       <div class="ask"><span>Остались вопросы? Напиши мне в Telegram: <b style="color:var(--fg)">@aleynik_v</b></span><a class="btn btn-ghost" href="https://t.me/aleynik_v" target="_blank" rel="noopener">Задать вопрос</a></div>
     </section>
@@ -697,6 +828,11 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   </div>
 </main>
 
+
+<div class="sticky-cta" id="stickyCta" hidden>
+  <div><b>4 990 ₽</b><small>первые 30 мест</small></div>
+  <a class="btn btn-main" href="https://t.me/tribute/app?startapp=s1aki" target="_blank" rel="noopener">Забрать доступ ↗</a>
+</div>
 <footer><div class="wrap"><span>© 2026 ReelForge Studio</span><span>Вопросы: <a href="https://t.me/aleynik_v" target="_blank" rel="noopener">@aleynik_v</a></span></div></footer>
 
 <script>
@@ -761,18 +897,6 @@ const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.
 }), { rootMargin: '200px' }) : null;
 document.querySelectorAll('video[data-src]').forEach(v => io ? io.observe(v) : (v.src = v.dataset.src));
 
-// до/после
-const stage = document.getElementById('baStage'), range = document.getElementById('baRange');
-const vids = stage.querySelectorAll('video');
-const setX = p => { p = Math.max(0, Math.min(100, p)); stage.style.setProperty('--x', p + '%'); range.value = p; };
-range.addEventListener('input', () => setX(+range.value));
-let drag = false;
-const fromEvt = e => { const r = stage.getBoundingClientRect(); setX((e.clientX - r.left) / r.width * 100); };
-stage.addEventListener('pointerdown', e => { drag = true; stage.setPointerCapture(e.pointerId); fromEvt(e); });
-stage.addEventListener('pointermove', e => drag && fromEvt(e));
-stage.addEventListener('pointerup', () => drag = false);
-setInterval(() => { if (Math.abs(vids[0].currentTime - vids[1].currentTime) > .12) vids[0].currentTime = vids[1].currentTime; }, 500);
-
 // редактор
 const word = document.getElementById('edWord'), acc = document.getElementById('edAcc');
 document.getElementById('edText').addEventListener('input', e => word.textContent = e.target.value || ' ');
@@ -806,6 +930,17 @@ const yr = document.getElementById('edY');
 const setY = () => { word.style.top = yr.value + '%'; };
 yr.addEventListener('input', setY); setY();
 document.getElementById('edSave').addEventListener('click', () => { document.getElementById('edSaved').hidden = false; });
+
+// плавающая кнопка на телефоне: появляется только с блока сравнения цен и прячется у блока цены
+(() => {
+  const bar = document.getElementById('stickyCta'), cmp = document.getElementById('compare'), offer = document.getElementById('offer');
+  const upd = () => {
+    const h = innerHeight, c = cmp.getBoundingClientRect(), o = offer.getBoundingClientRect();
+    const offerVisible = o.top < h && o.bottom > 0;
+    bar.hidden = !(c.top < h * .8) || offerVisible;
+  };
+  addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd); upd();
+})();
 </script>
 
 </body>
