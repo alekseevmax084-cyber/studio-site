@@ -456,7 +456,19 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 .saved{font:500 13px var(--f-mono);color:var(--blue2)}
 .ed-phone{position:relative;justify-self:center;width:min(330px,80vw);aspect-ratio:9/16;border-radius:30px;overflow:hidden;background:#000;box-shadow:0 0 0 8px #1d1f23,0 0 0 9px var(--line2),0 40px 80px -30px rgba(42,95,232,.5)}
 .ed-phone img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.ed-word{position:absolute;left:6%;right:6%;top:13%;text-align:center;font:400 clamp(26px,3.3vw,38px)/1.02 "Unbounded",var(--f-disp);color:#f7f8fa;text-shadow:0 4px 24px rgba(0,0,0,.6);transition:color .2s;overflow-wrap:anywhere}
+.ed-word{position:absolute;left:6%;right:6%;top:13%;text-align:center;font:400 clamp(26px,3.3vw,38px)/1.02 "Unbounded",var(--f-disp);color:#f7f8fa;text-shadow:0 4px 24px rgba(0,0,0,.6);transition:color .2s;overflow-wrap:normal;word-break:keep-all;white-space:normal}
+
+.ed-cut{z-index:2;pointer-events:none}
+.ctrl input.yr{padding:0;border:0;background:none;accent-color:var(--blue);height:24px}
+.ed-word{z-index:1}
+.ed-phone.front .ed-word{z-index:3}
+.ed-sub{z-index:4}
+.ed-phone.behind .ed-word{top:9%;font-size:clamp(34px,4.6vw,54px);font-weight:800;line-height:.95}
+.ed-phone.left .ed-word{left:5%;right:42%;text-align:left}
+.ed-phone.right .ed-word{left:42%;right:5%;text-align:right}
+.ed-phone.left .ed-word,.ed-phone.right .ed-word{top:22%}
+.ed-phone.behind.left .ed-word,.ed-phone.behind.right .ed-word{top:12%;left:4%;right:4%}
+.ed-phone.behind.left .ed-word{text-align:left}.ed-phone.behind.right .ed-word{text-align:right}
 .ed-word.script{font-size:clamp(34px,4.4vw,52px);transform:rotate(-4deg)}
 .ed-sub{position:absolute;left:0;right:0;bottom:22%;display:flex;justify-content:center;gap:6px;font:700 17px var(--f-body);color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.8)}
 .ed-sub b{background:#f7f8fa;color:#0b0b0c;padding:0 6px;border-radius:5px;text-shadow:none;transition:background .2s}
@@ -600,6 +612,19 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
               <button type="button" data-f="Rubik Mono One">Rubik Mono</button>
               <button type="button" data-f="Marck Script">Рукописный</button>
             </div>
+            <span class="lbl">Слой</span>
+            <div class="seg" id="edLayer">
+              <button type="button" data-l="behind" aria-pressed="true">За головой</button>
+              <button type="button" data-l="front">Поверх</button>
+            </div>
+            <span class="lbl">Положение</span>
+            <div class="seg" id="edPos">
+              <button type="button" data-p="left">Слева</button>
+              <button type="button" data-p="center" aria-pressed="true">По центру</button>
+              <button type="button" data-p="right">Справа</button>
+            </div>
+            <label for="edY">Высота текста</label>
+            <input id="edY" class="yr" type="range" min="2" max="70" value="10">
             <span class="lbl">Цвет</span>
             <div class="sw" id="edColor">
               <button type="button" style="--c:#f7f8fa" aria-label="белый" aria-pressed="true"></button>
@@ -612,9 +637,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
             <span class="saved" id="edSaved" hidden>Стиль «Мой» сохранён · пример</span>
           </div>
         </div>
-        <div class="ed-phone">
-          <img src="media/before.jpg" alt="Кадр из исходника">
+        <div class="ed-phone behind center" id="edPhone">
+          <img src="media/ed_bg.jpg" alt="Кадр из исходника">
           <div class="ed-word" id="edWord">ЗА 20 ДОЛЛАРОВ</div>
+          <img class="ed-cut" src="media/ed_cut.png" alt="">
           <div class="ed-sub"><span>и это</span> <b id="edAcc">очень</b> <span>легко</span></div>
         </div>
       </div>
@@ -756,6 +782,29 @@ const pick = (box, fn) => box.addEventListener('click', e => {
 });
 pick(document.getElementById('edFont'), b => { word.style.fontFamily = `"${b.dataset.f}", var(--f-disp)`; word.classList.toggle('script', b.dataset.f === 'Marck Script'); });
 pick(document.getElementById('edColor'), b => { const c = b.style.getPropertyValue('--c'); word.style.color = c; acc.style.background = c; });
+
+const phone = document.getElementById('edPhone');
+pick(document.getElementById('edLayer'), b => { phone.classList.toggle('behind', b.dataset.l === 'behind'); phone.classList.toggle('front', b.dataset.l === 'front'); });
+pick(document.getElementById('edPos'), b => { phone.classList.remove('left', 'center', 'right'); phone.classList.add(b.dataset.p); });
+
+const fitWord = () => {
+  const w = phone.clientWidth; let size = w * (phone.classList.contains('behind') ? .17 : (phone.classList.contains('center') ? .12 : .1));
+  word.style.fontSize = size + 'px';
+  let guard = 40;
+  while (guard-- && size > 12 && (word.scrollWidth > word.clientWidth + 1 || [...word.textContent.split(/\s+/)].some(() => false))) { size *= .92; word.style.fontSize = size + 'px'; }
+  // не даём разрывать слово: уменьшаем, пока самое длинное слово влезает в строку
+  const longest = word.textContent.split(/\s+/).reduce((a, b) => b.length > a.length ? b : a, '');
+  const probe = document.createElement('span'); probe.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;font:inherit'; probe.textContent = longest; word.appendChild(probe);
+  guard = 40; while (guard-- && size > 12 && probe.offsetWidth > word.clientWidth) { size *= .92; word.style.fontSize = size + 'px'; }
+  probe.remove();
+};
+['edLayer','edPos','edFont'].forEach(id => document.getElementById(id).addEventListener('click', () => requestAnimationFrame(fitWord)));
+document.getElementById('edText').addEventListener('input', () => requestAnimationFrame(fitWord));
+window.addEventListener('resize', fitWord);
+(document.fonts ? document.fonts.ready : Promise.resolve()).then(fitWord); fitWord();
+const yr = document.getElementById('edY');
+const setY = () => { word.style.top = yr.value + '%'; };
+yr.addEventListener('input', setY); setY();
 document.getElementById('edSave').addEventListener('click', () => { document.getElementById('edSaved').hidden = false; });
 </script>
 
