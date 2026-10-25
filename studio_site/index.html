@@ -662,8 +662,8 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
     <section id="ba">
       <div class="ba">
         <div class="ba2">
-          <figure class="bb"><span class="bb-tag">До</span><div class="bb-media"><video data-src="media/before.mp4" poster="media/before.jpg" muted loop playsinline preload="none"></video></div></figure>
-          <figure class="bb after"><span class="bb-tag">После</span><div class="bb-media"><video data-src="media/after.mp4" poster="media/depth-ui.jpg" muted loop playsinline preload="none"></video></div></figure>
+          <figure class="bb"><span class="bb-tag">До</span><div class="bb-media"><video src="media/before.mp4" poster="media/before.jpg" autoplay muted loop playsinline preload="auto"></video></div></figure>
+          <figure class="bb after"><span class="bb-tag">После</span><div class="bb-media"><video src="media/after.mp4" poster="media/depth-ui.jpg" autoplay muted loop playsinline preload="auto"></video></div></figure>
         </div>
         <div>
           <p class="tc">До и после</p>
@@ -893,8 +893,9 @@ grid.innerHTML = STYLES.map(([id, name, desc]) => `
 
 const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => {
   const v = e.target;
-  if (e.isIntersecting) { if (!v.src) v.src = v.dataset.src; v.play().catch(() => {}); } else v.pause();
+  if (e.isIntersecting) { v.muted = true; v.playsInline = true; if (!v.getAttribute('src')) { v.src = v.dataset.src; v.load(); } v.play().catch(() => {}); } else v.pause();
 }), { rootMargin: '200px' }) : null;
+document.querySelectorAll('video[autoplay]').forEach(v => { v.muted = true; v.play().catch(() => {}); });
 document.querySelectorAll('video[data-src]').forEach(v => io ? io.observe(v) : (v.src = v.dataset.src));
 
 // редактор
